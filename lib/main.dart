@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_setup/login%20screen/login.dart';
+import 'package:firebase_setup/login%20screen/main_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_setup/login screen/login.dart';
-import 'homepage.dart';
 import 'login screen/dashboard.dart';
-import 'login screen/registration.dart';
+import 'registration Screen/registration.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,19 +17,19 @@ Future main() async{
   )
   );
 }
-
 class MainApp extends StatelessWidget {
-
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:'/ reg',
+      home: main_page(),
+      
+      // initialRoute:'/ reg',
       routes: {
-        '/ homepage':(context)=>homepage(),
+        // '/ homepage':(context)=>homepage(),
         '/ login':(context)=>login(),
-        '/ dashboard':(context)=>dashboard(),
+        // '/ dashboard':(context)=>dashboard(),
         '/ reg':(context)=>registration()
       },
     );
