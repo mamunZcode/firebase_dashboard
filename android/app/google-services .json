@@ -1,15 +1,16 @@
- {
+{
   "project_info": {
     "project_number": "734812578241",
+    "firebase_url": "https://firebsesetup-default-rtdb.firebaseio.com",
     "project_id": "firebsesetup",
     "storage_bucket": "firebsesetup.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:734812578241:android:aa9beb47a06d586a91cf40",
+        "mobilesdk_app_id": "1:734812578241:android:4e177225661a772e91cf40",
         "android_client_info": {
-          "package_name": "com.example.firebase_setup"
+          "package_name": "com.mamun.firebase_setup"
         }
       },
       "oauth_client": [

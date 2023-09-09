@@ -1,16 +1,26 @@
+import 'package:firebase_setup/login%20screen/login.dart';
 import 'package:flutter/material.dart';
 import '../TextContainer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_setup/service/firebase_auth_methods.dart';
 
 class registration extends StatefulWidget{
+  static const String id= 'registration';
   @override
   State<registration> createState() => _registrationState();
 }
+
 class _registrationState extends State<registration> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    void singup(){
+      context.read<FirebaseAuthMethods>().signUpWithEmail(email: emailController.value.text, password: passController.value.text, context: context);
+    }
     return Scaffold(
       body:  SafeArea(
         child: Center(
@@ -34,20 +44,21 @@ class _registrationState extends State<registration> {
                 height: 50.0,
               ),
               //Name
-              TextContainer(nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false,),
+              TextContainer(nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false,
+
+              ),
               //Email
-              TextContainer(nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,),
+              TextContainer(nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,
+              ),
               //pass
-              TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true),
+              TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,),
               //Button
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/ login');
-                      },
+                      onPressed: singup,
                       icon: Icon(
                         Icons.done,
                       ),
@@ -88,7 +99,12 @@ class _registrationState extends State<registration> {
                    SizedBox(
                      width: 5.0,
                    ),
-                   Text('click here',textAlign: TextAlign.center,),
+                   GestureDetector(
+                     onTap: (){
+                       Navigator.pushNamed(context,login.id);
+                     },
+                       child: Text('click here',textAlign: TextAlign.center,)
+                   ),
                  ],
                )
             ],

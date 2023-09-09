@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_setup/registration%20Screen/registration.dart';
 import 'package:flutter/material.dart';
 import '../TextContainer.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'dashboard.dart';
 import 'package:firebase_setup/registration Screen/registration.dart';
-import 'main_page.dart';
 import '../registration Screen/registration.dart';
 
 class login extends StatefulWidget {
+  static const String id= 'login';
   @override
   State<login> createState() => _loginState();
   const login ({Key?key}): super (key: key);
@@ -16,18 +18,9 @@ class _loginState extends State<login> {
   //Text Controller
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Future singIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailNameController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-  }
-  @override
-  void dispose() {
-    emailNameController.dispose();
-    passwordController.dispose();
-    super.dispose();
+// Firebase auth init:
+  void singIn(){
+    context.read<FirebaseAuthMethods>().loginWithEmail(email: emailNameController.value.text, password: passwordController.value.text, context: context);
   }
   @override
   Widget build(BuildContext context) {
@@ -63,12 +56,14 @@ class _loginState extends State<login> {
                 TextContainer(nameController: emailNameController,
                     labelText: 'Enter Your Email',
                     icon: Icon(Icons.drive_file_rename_outline_sharp),
-                    obscureText: false),
+                    obscureText: false,
+                ),
                 //Password
                 TextContainer(nameController: passwordController,
                     labelText: 'Enter your password',
                     icon: Icon(Icons.password_outlined),
-                    obscureText: true),
+                    obscureText: true,
+                ),
                 //Button
                 Expanded(
                   child: Padding(
@@ -119,7 +114,7 @@ class _loginState extends State<login> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/ reg');
+                          Navigator.pushNamed(context,registration.id);
                         },
                         child: Text('click here',textAlign: TextAlign.center,)
 

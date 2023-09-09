@@ -5,12 +5,17 @@ class TextContainer extends StatelessWidget {
     required this.nameController,
     required this.labelText,
     required this.icon,
-    required this.obscureText
+    required this.obscureText,
+
+
+
   });
   final TextEditingController nameController;
   final String labelText;
   final Icon icon;
   final bool obscureText;
+
+
   @override
   Widget build(BuildContext context) {
     return Container(

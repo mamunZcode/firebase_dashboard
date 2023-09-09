@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_setup/login%20screen/login.dart';
-import 'package:firebase_setup/login%20screen/main_page.dart';
+import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'login screen/dashboard.dart';
 import 'registration Screen/registration.dart';
 
@@ -13,8 +15,20 @@ Future main() async{
 
   }
   await Firebase.initializeApp();
-  runApp(const MainApp(
-  )
+  runApp( MultiProvider(
+    providers: [
+      Provider<FirebaseAuthMethods>(
+        create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
+      ),
+      StreamProvider(
+        create: (context) => context.read<FirebaseAuthMethods>().authState,
+        initialData: null,
+      ),
+    ],
+    child: const MainApp(),
+  ),
+
+
   );
 }
 class MainApp extends StatelessWidget {
@@ -23,14 +37,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: main_page(),
-      
-      // initialRoute:'/ reg',
+      initialRoute:login.id,
       routes: {
-        // '/ homepage':(context)=>homepage(),
-        '/ login':(context)=>login(),
-        // '/ dashboard':(context)=>dashboard(),
-        '/ reg':(context)=>registration()
+        login.id:(context)=>login(),
+        registration.id:(context)=>registration(),
+        dashboard.id:(context)=>dashboard()
       },
     );
   }
