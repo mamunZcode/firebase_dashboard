@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TextContainer extends StatelessWidget {
-  const TextContainer({
+      TextContainer({
     required this.nameController,
     required this.labelText,
     required this.icon,
     required this.obscureText,
+    required this.hintText
 
 
 
@@ -14,6 +15,8 @@ class TextContainer extends StatelessWidget {
   final String labelText;
   final Icon icon;
   final bool obscureText;
+  final hintText;
+
 
 
   @override
@@ -29,14 +32,15 @@ class TextContainer extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.black87,
                       fontSize: 20.0,
-                      fontStyle: FontStyle.italic),
+                      // fontStyle: FontStyle.italic
+                  ),
                   keyboardType: TextInputType.text,
                   controller: nameController,
                   decoration: InputDecoration(
                     labelText: labelText,
                     prefixIcon: icon,
                     labelStyle: TextStyle(color: Colors.black87),
-                    hintText: "Mamun",
+                    hintText: hintText,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
                       borderRadius: BorderRadius.circular(5.0),

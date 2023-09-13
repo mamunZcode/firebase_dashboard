@@ -57,12 +57,14 @@ class _loginState extends State<login> {
                     labelText: 'Enter Your Email',
                     icon: Icon(Icons.drive_file_rename_outline_sharp),
                     obscureText: false,
+                    hintText: 'mamun@65gmail.com',
                 ),
                 //Password
                 TextContainer(nameController: passwordController,
                     labelText: 'Enter your password',
                     icon: Icon(Icons.password_outlined),
                     obscureText: true,
+                    hintText: '56846',
                 ),
                 //Button
                 Expanded(

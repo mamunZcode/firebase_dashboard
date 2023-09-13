@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'login screen/dashboard.dart';
 import 'registration Screen/registration.dart';
-
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb){
@@ -28,7 +27,6 @@ Future main() async{
     child: const MainApp(),
   ),
 
-
   );
 }
 class MainApp extends StatelessWidget {
@@ -41,7 +39,7 @@ class MainApp extends StatelessWidget {
       routes: {
         login.id:(context)=>login(),
         registration.id:(context)=>registration(),
-        dashboard.id:(context)=>dashboard()
+        dashboard.id:(context)=>dashboard(),
       },
     );
   }

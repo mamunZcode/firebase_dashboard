@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_setup/login%20screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -152,7 +152,7 @@ class _dashboardState extends State<dashboard> {
                         Navigator.pushNamed(context,login.id);
                       },
                       label: Text(
-                        'login',
+                        'mamun page',
                         style: TextStyle(color: Colors.black),
                       ),
                       icon: Icon(Icons.login),

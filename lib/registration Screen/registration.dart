@@ -1,9 +1,10 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:firebase_setup/login%20screen/login.dart';
 import 'package:flutter/material.dart';
 import '../TextContainer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
+
 
 class registration extends StatefulWidget{
   static const String id= 'registration';
@@ -15,6 +16,7 @@ class _registrationState extends State<registration> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +46,15 @@ class _registrationState extends State<registration> {
                 height: 50.0,
               ),
               //Name
-              TextContainer(nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false,
-
+              TextContainer(nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false, hintText:'Muntasir',
               ),
               //Email
-              TextContainer(nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,
+              TextContainer(nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,hintText: 'mamun@gmail.com',
               ),
               //pass
-              TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,),
+              TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,hintText: '12345',),
+
+              TextContainer(nameController: ageController, labelText: 'Enter Your Age Please', icon: Icon(EvaIcons.heart), obscureText: false, hintText: '12'),
               //Button
               Expanded(
                 child: Padding(
