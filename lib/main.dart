@@ -5,8 +5,9 @@ import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'login screen/dashboard.dart';
+import 'dashboard/dashboard.dart';
 import 'registration Screen/registration.dart';
+import 'dashboard/dashboard2.dart';
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb){
@@ -26,7 +27,6 @@ Future main() async{
     ],
     child: const MainApp(),
   ),
-
   );
 }
 class MainApp extends StatelessWidget {
@@ -40,6 +40,7 @@ class MainApp extends StatelessWidget {
         login.id:(context)=>login(),
         registration.id:(context)=>registration(),
         dashboard.id:(context)=>dashboard(),
+        dashboard2.id:(context)=>dashboard2()
       },
     );
   }

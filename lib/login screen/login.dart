@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../TextContainer.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
-import 'dashboard.dart';
+import '../dashboard/dashboard.dart';
 import 'package:firebase_setup/registration Screen/registration.dart';
 import '../registration Screen/registration.dart';
 

@@ -7,19 +7,20 @@ class dashboardContainer extends StatelessWidget {
     required this.text,
     required this.bottomText,
     required this.icon,
-    required this.color
-
+    required this.color,
+    required this.child
   });
   final Text text;
   final Text bottomText;
   final  IconData icon;
   final Color color;
-
-
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child:
+    return Expanded(
+      flex: 3,
+        child:
     Card(
       color: color,
       elevation: 4,
@@ -33,6 +34,7 @@ class dashboardContainer extends StatelessWidget {
                 children: [
                   text,
                   bottomText,
+                  child
                 ],
               ),
             ),

@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_setup/login screen/login.dart';
-import 'package:firebase_setup/login screen/dashboard.dart';
+import 'package:firebase_setup/dashboard/dashboard.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;

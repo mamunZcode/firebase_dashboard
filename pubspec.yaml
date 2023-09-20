@@ -26,5 +26,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+#    - android/build.gradle
     - assets/love2.png
     - assets/newws.png
+    - assets/Mamun.jpeg
+    - assets/background.png
+    - assets/cat.png
