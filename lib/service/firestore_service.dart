@@ -5,11 +5,10 @@ import 'package:firebase_setup/firestore_docs/MyDocement.dart';
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
   void listenToDocuments(String userId, Function(List<MyDocument>) callback) {
     _firestore.collection(userId).snapshots().listen((snapshot) {
-      print('object length'+ snapshot.docChanges.length.toString());
-      print('object'+ snapshot.docChanges.first.type.toString());
+      print('object length' + snapshot.docChanges.length.toString());
+      print('object' + snapshot.docChanges.first.type.toString());
       final List<MyDocument> documents = snapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
         data['doc_id'] = doc.id; // Add the document ID to the map
@@ -20,9 +19,14 @@ class FirestoreService {
   }
 
   // Add a document to a Firestore collection
-  Future<void> addDocument(
+  Future<void> addProfileData(
       String collectionName, Map<String, dynamic> data) async {
-    await _firestore.collection(collectionName).add(data);
+    await _firestore.collection(collectionName).doc('profile_data').set(data);
+  }
+
+  Future<void> addPersonalData(
+      String collectionName, Map<String, dynamic> data) async {
+    await _firestore.collection(collectionName).doc('personal_data').set(data);
   }
 
   // Update a document in a Firestore collection
@@ -47,6 +51,13 @@ class FirestoreService {
       return data;
     }).toList();
     return documents;
+  }
+
+  Future<Object?> getProfileData(String uid) async {
+    final DocumentSnapshot snapshot =
+        await _firestore.collection(uid).doc('profile_data').get();
+
+    return snapshot.data();
   }
 
   Future<List<MyDocument>> refreshData(String userId) async {

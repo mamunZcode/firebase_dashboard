@@ -1,13 +1,16 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_setup/dashboard/user_details_form.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_setup/login screen/login.dart';
 import 'package:firebase_setup/dashboard/dashboard.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
+
   FirebaseAuthMethods(this._auth);
+
   User get user => _auth.currentUser!;
+
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
   // EMAIL SIGN UP
@@ -20,7 +23,6 @@ class FirebaseAuthMethods {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-
       );
       await sendEmailVerification(context);
       Navigator.pushNamed(context, login.id);
@@ -55,7 +57,7 @@ class FirebaseAuthMethods {
       // replace navigator with home screen
       Navigator.replace(context,
           oldRoute: ModalRoute.of(context)!,
-          newRoute: MaterialPageRoute(builder: (context) => dashboard()));
+          newRoute: MaterialPageRoute(builder: (context) => UserDetailsForm()));
     } on FirebaseAuthException catch (e) {
       print('failed ' + e.toString());
     }

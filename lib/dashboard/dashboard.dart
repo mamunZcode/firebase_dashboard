@@ -6,10 +6,19 @@ import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'dashboard2.dart';
 import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
 
-class dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  static const String id = 'dashboard';
+
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final Stream<QuerySnapshot> user =
       FirebaseFirestore.instance.collection('info').snapshots();
-  static const String id = 'dashboard';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
