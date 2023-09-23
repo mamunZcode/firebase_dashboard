@@ -22,7 +22,7 @@ class FirestoreService {
   // Add a document to a Firestore collection
   Future<void> addDocument(
       String collectionName, Map<String, dynamic> data) async {
-    await _firestore.collection('info').add(data);
+    await _firestore.collection(collectionName).add(data);
   }
 
   // Update a document in a Firestore collection

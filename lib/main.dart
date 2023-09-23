@@ -35,7 +35,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:login.id,
+      // initialRoute:login.id,
+      home: AuthWrapper(),
       routes: {
         login.id:(context)=>login(),
         registration.id:(context)=>registration(),
@@ -43,5 +44,21 @@ class MainApp extends StatelessWidget {
         dashboard2.id:(context)=>dashboard2()
       },
     );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+
+    print('USER ${firebaseUser?.email}');
+
+    if (firebaseUser != null) {
+      return dashboard();
+    }
+    return login();
   }
 }
