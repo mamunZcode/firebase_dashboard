@@ -48,11 +48,7 @@ class _dashboard2State extends State<dashboard2> {
                               context,
                               index,
                               ){
-                            return Text('User name is :${data.docs[index]['name']}'+'\n'+
-                                'Email is :${data.docs[index]['Email']}''\n'+
-                                'Address is :${data.docs[index]['address']}''\n'+
-                                'phone number is :${data.docs[index]['phone Number']}',style: TextStyle(fontSize: 20.0,color: Colors.deepOrange),
-                            );
+                            return Text('User name ${data.docs[index]['Name']}' );
                           }
                       );
                     },

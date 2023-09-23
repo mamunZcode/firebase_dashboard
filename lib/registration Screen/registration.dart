@@ -17,6 +17,7 @@ class _registrationState extends State<registration> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  TextEditingController idController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _registrationState extends State<registration> {
               //pass
               TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,hintText: '12345',),
 
-              TextContainer(nameController: ageController, labelText: 'Enter Your Age Please', icon: Icon(EvaIcons.heart), obscureText: false, hintText: '12'),
+              TextContainer(nameController: idController, labelText: 'Enter Your id Please', icon: Icon(EvaIcons.heart), obscureText: false, hintText: '192-35-2870'),
               //Button
               Expanded(
                 child: Padding(
@@ -62,6 +63,7 @@ class _registrationState extends State<registration> {
                   child: Expanded(
                     child: ElevatedButton.icon(
                       onPressed: singup,
+
                       icon: Icon(
                         Icons.done,
                       ),

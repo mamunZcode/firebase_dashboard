@@ -20,6 +20,7 @@ class FirebaseAuthMethods {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
+
       );
       await sendEmailVerification(context);
       Navigator.pushNamed(context, login.id);

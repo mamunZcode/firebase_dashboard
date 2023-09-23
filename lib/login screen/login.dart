@@ -18,6 +18,7 @@ class _loginState extends State<login> {
   //Text Controller
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController idController = TextEditingController();
 // Firebase auth init:
   void singIn(){
     context.read<FirebaseAuthMethods>().loginWithEmail(email: emailNameController.value.text, password: passwordController.value.text, context: context);
