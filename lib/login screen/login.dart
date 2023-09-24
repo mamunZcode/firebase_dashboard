@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_setup/dashboard/dashboard.dart';
 import 'package:firebase_setup/registration%20Screen/registration.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +18,6 @@ class _loginState extends State<login> {
   //Text Controller
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController idController = TextEditingController();
 
 // Firebase auth init:
   void singIn() {
@@ -91,7 +88,6 @@ class _loginState extends State<login> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       singIn();
-                      // Navigator.pushNamed(context, '/ dashboard');
                     },
                     icon: Icon(
                       Icons.image,

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../service/firebase_auth_methods.dart';
+import '../../service/firebase_auth_methods.dart';
 
 class UserDetailsForm extends StatefulWidget {
   static const id = 'user_details_form';
@@ -54,7 +54,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Details Form'),
+        title: Text('MyFrom'),
       ),
       body: Consumer<FirebaseAuthMethods>(builder: (context, auth, child) {
         if (!isDataExistForCurrentUser) {

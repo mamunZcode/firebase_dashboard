@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_setup/dashboard/user_details_form.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_setup/login screen/login.dart';
 import 'package:firebase_setup/dashboard/dashboard.dart';
@@ -57,7 +56,7 @@ class FirebaseAuthMethods {
       // replace navigator with home screen
       Navigator.replace(context,
           oldRoute: ModalRoute.of(context)!,
-          newRoute: MaterialPageRoute(builder: (context) => UserDetailsForm()));
+          newRoute: MaterialPageRoute(builder: (context) => Dashboard()));
     } on FirebaseAuthException catch (e) {
       print('failed ' + e.toString());
     }

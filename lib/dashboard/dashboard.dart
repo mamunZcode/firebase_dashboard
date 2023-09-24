@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
+import '../TextContainer.dart';
+import '../service/firestore_service.dart';
 import 'dashboard2.dart';
 import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
+import 'dashboard2.dart';
 
 class Dashboard extends StatefulWidget {
   static const String id = 'dashboard';
@@ -16,8 +19,43 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final Stream<QuerySnapshot> user =
-      FirebaseFirestore.instance.collection('info').snapshots();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController adressController = TextEditingController();
+  TextEditingController phonenumController = TextEditingController();
+  FirestoreService firestoreService = FirestoreService();
+  bool isDataExistForCurrentUser = false;
+  Map<String, dynamic> data = {};
+
+  setStateIfDataExist() async {
+    var currentUser = context.read<FirebaseAuthMethods>().user;
+    var docs = await firestoreService.getDocuments(currentUser.uid);
+    if (docs.isNotEmpty) {
+      setState(() {
+        data = docs.first;
+      });
+      setState(() {
+        isDataExistForCurrentUser = true;
+      });
+    }
+  }
+
+  void saveData() async {
+    var currentUser = context.read<FirebaseAuthMethods>().user;
+    //save data to firebase
+    await firestoreService.addProfileData(currentUser.uid, {
+      'name': nameController.value.text,
+      'age': ageController.value.text,
+      'address':adressController.value.text,
+      'phonenum':phonenumController.value.text
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    setStateIfDataExist();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +72,10 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           Consumer<FirebaseAuthMethods>(builder: (context, auth, child) {
+            if (!isDataExistForCurrentUser) {
+              return user_details_form();
+            }
+            else
             return SafeArea(
               child: ListView(
                 children: [
@@ -54,53 +96,20 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ),
                             bottomText: Text(
-                              '${auth.user.email}',
+                              '${auth.user.email}'+'\n'
+                                  'Name: ${data['name']},'+'\n'
+                                  'Age: ${data['age']}',
                               style: TextStyle(fontSize: 24),
                             ),
                             icon: Icons.attach_money,
                             color: Colors.deepOrange,
-                            child: Container(
-                              child: StreamBuilder<QuerySnapshot>(
-                                stream: user,
-                                builder: (
-                                  BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot,
-                                ) {
-                                  if (snapshot.hasError) {
-                                    return Text('This is error');
-                                  }
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Text('Loading');
-                                  }
-                                  final data = snapshot.requireData;
-                                  return ListView.builder(
-                                      itemCount: data.size,
-                                      itemBuilder: (
-                                        context,
-                                        index,
-                                      ) {
-                                        return Text(
-                                          'User name is:'
-                                          '\n'
-                                          '${data.docs[index]['Name']}',
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: Colors.black26,
-                                              fontWeight: FontWeight.bold),
-                                        );
-                                      });
-                                },
-                              ),
-                              height: 100,
-                              width: 150,
-                            ),
+
                           ),
                         ),
                         Expanded(
                             child: dashboardContainer(
                           text: Text(
-                            'totalAmount',
+                            'TotalAmount',
                             style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -108,49 +117,19 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           bottomText: Text(
-                            '\$1000.00',
+                            '\$1000.00'+'\n'
+                                'Address: ${data['address']}'+'\n'
+                                'phonenum: ${data['phonenum']}',
                             style: TextStyle(fontSize: 24, color: Colors.white),
                           ),
                           icon: Icons.cabin,
                           color: Colors.deepPurple,
-                          child: Container(
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: user,
-                              builder: (
-                                BuildContext context,
-                                AsyncSnapshot<QuerySnapshot> snapshot,
-                              ) {
-                                if (snapshot.hasError) {
-                                  return Text('This is error');
-                                }
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Text('Loading');
-                                }
-                                final data = snapshot.requireData;
-                                return ListView.builder(
-                                    itemCount: data.size,
-                                    itemBuilder: (
-                                      context,
-                                      index,
-                                    ) {
-                                      return Text(
-                                        'User name is:${data.docs[index]['Name']}',
-                                        style: TextStyle(
-                                            fontSize: 5.0,
-                                            color: Colors.deepOrange),
-                                      );
-                                    });
-                              },
-                            ),
-                            height: 100,
-                            width: 150,
-                          ),
+
                         )),
                         Expanded(
                           child: dashboardContainer(
                             text: Text(
-                              'my amount',
+                              'MY amount',
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -164,45 +143,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             icon: Icons.ice_skating,
                             color: Colors.deepPurpleAccent,
-                            child: Container(
-                              child: StreamBuilder<QuerySnapshot>(
-                                stream: user,
-                                builder: (
-                                  BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot,
-                                ) {
-                                  if (snapshot.hasError) {
-                                    return Text('This is error');
-                                  }
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Text('Loading');
-                                  }
-                                  final data = snapshot.requireData;
-                                  return ListView.builder(
-                                      itemCount: data.size,
-                                      itemBuilder: (
-                                        context,
-                                        index,
-                                      ) {
-                                        return Text(
-                                          'User name is :${data.docs[index]['Name']}' +
-                                              '\n' +
-                                              'Email is :${data.docs[index]['Email']}'
-                                                  '\n' +
-                                              'Address is :${data.docs[index]['address']}'
-                                                  '\n' +
-                                              'phone number is :${data.docs[index]['phone Number']}',
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.deepOrange),
-                                        );
-                                      });
-                                },
-                              ),
-                              height: 100,
-                              width: 150,
-                            ),
+
                           ),
                         ),
                         Expanded(
@@ -220,47 +161,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           icon: Icons.ice_skating,
                           color: Colors.deepOrange,
-                          child: Container(
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: user,
-                              builder: (
-                                BuildContext context,
-                                AsyncSnapshot<QuerySnapshot> snapshot,
-                              ) {
-                                if (snapshot.hasError) {
-                                  return Text('This is error');
-                                }
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Text('Loading');
-                                }
-                                final data = snapshot.requireData;
-                                return ListView.builder(
-                                    itemCount: data.size,
-                                    itemBuilder: (
-                                      context,
-                                      index,
-                                    ) {
-                                      return Text(
-                                        'User name is :${data.docs[index]['name']}' +
-                                            '\n' +
-                                            'Email is :${data.docs[index]['Email']}'
-                                                '\n' +
-                                            'Address is :${data.docs[index]['address']}'
-                                                '\n' +
-                                            'phone number is :${data.docs[index]['phone Number']}'
-                                                '\n' +
-                                            'fav color is: ${data.docs[index]['fav color']}',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            color: Colors.black),
-                                      );
-                                    });
-                              },
-                            ),
-                            height: 100,
-                            width: 150,
-                          ),
+
                         )),
                         Expanded(
                           child: dashboardContainer(
@@ -278,45 +179,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             icon: Icons.ice_skating,
                             color: Colors.orangeAccent,
-                            child: Container(
-                              child: StreamBuilder<QuerySnapshot>(
-                                stream: user,
-                                builder: (
-                                  BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot,
-                                ) {
-                                  if (snapshot.hasError) {
-                                    return Text('This is error');
-                                  }
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Text('Loading');
-                                  }
-                                  final data = snapshot.requireData;
-                                  return ListView.builder(
-                                      itemCount: data.size,
-                                      itemBuilder: (
-                                        context,
-                                        index,
-                                      ) {
-                                        return Text(
-                                          'User name is :${data.docs[index]['name']}' +
-                                              '\n' +
-                                              'Email is :${data.docs[index]['Email']}'
-                                                  '\n' +
-                                              'Address is :${data.docs[index]['address']}'
-                                                  '\n' +
-                                              'phone number is :${data.docs[index]['phone Number']}',
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.deepOrange),
-                                        );
-                                      });
-                                },
-                              ),
-                              height: 100,
-                              width: 150,
-                            ),
+
                           ),
                         )
                       ],
@@ -333,7 +196,7 @@ class _DashboardState extends State<Dashboard> {
                           onPressed: () {
                             Map<String, String> data = {
                               "id": "1",
-                              "Name": "Muntasir",
+                              "Name": "Boss",
                               'roll':'65812'
                             };
                             FirebaseFirestore.instance
@@ -353,10 +216,57 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                   ),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: (){
+                          context.read<FirebaseAuthMethods>().signOut(context);
+                        },
+                        child: Text('LogOut')),
+                  )
                 ],
               ),
             );
           }),
         ]));
+  }
+  Column user_details_form() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(child: Text('Give Your Information',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic,color: Color(0xff4f378b)),)),
+        TextContainer(
+            nameController: nameController,
+            labelText: "Name",
+            icon: Icon(Icons.verified_user),
+            obscureText: false,
+            hintText: 'Enter your name'),
+        TextContainer(
+            nameController: ageController,
+            labelText: "Age",
+            icon: Icon(Icons.numbers),
+            obscureText: false,
+            hintText: 'Enter your age'),
+        TextContainer(
+            nameController: adressController,
+            labelText: 'Enter Your Address',
+            icon:Icon(Icons.ice_skating_sharp),
+            obscureText: false,
+            hintText: 'gfd'),
+        TextContainer(
+            nameController: phonenumController,
+            labelText: 'Enter Your Phone Num',
+            icon: Icon(Icons.ice_skating_sharp),
+            obscureText: false,
+            hintText: '017456'),
+        SizedBox(
+          height: 20.0,
+        ),
+        ElevatedButton(
+            onPressed: (){
+              saveData();
+             setStateIfDataExist();
+        }, child: Text('submit'))
+      ],
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_setup/dashboard/user_details_form.dart';
 import 'package:firebase_setup/login%20screen/login.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/foundation.dart';
@@ -51,7 +50,6 @@ class MainApp extends StatelessWidget {
         registration.id: (context) => registration(),
         Dashboard.id: (context) => Dashboard(),
         dashboard2.id: (context) => dashboard2(),
-        UserDetailsForm.id: (context) => UserDetailsForm(),
       },
     );
   }
@@ -67,7 +65,7 @@ class AuthWrapper extends StatelessWidget {
     print('USER ${firebaseUser?.email}');
 
     if (firebaseUser != null) {
-      return UserDetailsForm();
+      return Dashboard();
     }
     return login();
   }

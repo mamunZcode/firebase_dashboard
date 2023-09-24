@@ -6,13 +6,13 @@ class dashboardContainer extends StatelessWidget {
       required this.bottomText,
       required this.icon,
       required this.color,
-      required this.child});
+      });
 
   final Text text;
   final Text bottomText;
   final IconData icon;
   final Color color;
-  final Widget child;
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class dashboardContainer extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [text, bottomText, child],
+                children: [text, bottomText,],
               ),
             ),
             Icon(
