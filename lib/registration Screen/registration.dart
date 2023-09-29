@@ -122,5 +122,6 @@ class _registrationState extends State<registration> {
     nameController.text='';
     emailController.text='';
     passController.text='';
+    idController.text='';
   }
 }

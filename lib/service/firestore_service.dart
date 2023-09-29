@@ -25,8 +25,8 @@ class FirestoreService {
   }
 
   Future<void> addPersonalData(
-      String collectionName, Map<String, dynamic> data) async {
-    await _firestore.collection(collectionName).doc('personal_data').set(data);
+      String collectionName, Map<String, dynamic> data2) async {
+    await _firestore.collection(collectionName).doc('personal_data').set(data2);
   }
 
   // Update a document in a Firestore collection

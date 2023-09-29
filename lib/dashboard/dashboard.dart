@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,6 @@ import '../TextContainer.dart';
 import '../service/firestore_service.dart';
 import 'dashboard2.dart';
 import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
-import 'dashboard2.dart';
 
 class Dashboard extends StatefulWidget {
   static const String id = 'dashboard';
@@ -26,15 +24,20 @@ class _DashboardState extends State<Dashboard> {
   FirestoreService firestoreService = FirestoreService();
   bool isDataExistForCurrentUser = false;
   Map<String, dynamic> data = {};
+  Map<String, dynamic> data2 = {};
 
   setStateIfDataExist() async {
     var currentUser = context.read<FirebaseAuthMethods>().user;
     var docs = await firestoreService.getDocuments(currentUser.uid);
+    var profile_data =
+        docs.where((map) => map["doc_id"].contains("profile_data")).toList();
+    var personal_data =
+        docs.where((map) => map["doc_id"].contains("personal_data")).toList();
+
     if (docs.isNotEmpty) {
       setState(() {
-        data = docs.first;
-      });
-      setState(() {
+        data = profile_data.first;
+        data2 = personal_data.first;
         isDataExistForCurrentUser = true;
       });
     }
@@ -42,20 +45,21 @@ class _DashboardState extends State<Dashboard> {
 
   void saveData() async {
     var currentUser = context.read<FirebaseAuthMethods>().user;
-    //save data to firebase
     await firestoreService.addProfileData(currentUser.uid, {
       'name': nameController.value.text,
       'age': ageController.value.text,
-      'address':adressController.value.text,
-      'phonenum':phonenumController.value.text
+    });
+    await firestoreService.addPersonalData(currentUser.uid, {
+      'address': adressController.value.text,
+      'phonenum': phonenumController.value.text,
     });
   }
+
   @override
   void initState() {
     super.initState();
     setStateIfDataExist();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,42 +78,40 @@ class _DashboardState extends State<Dashboard> {
           Consumer<FirebaseAuthMethods>(builder: (context, auth, child) {
             if (!isDataExistForCurrentUser) {
               return user_details_form();
-            }
-            else
-            return SafeArea(
-              child: ListView(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Row(
+            } else
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: dashboardContainer(
-                            text: Text(
-                              'your mail',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
+                        dashboardContainer(
+                          text: Text(
+                            'your mail',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                             ),
-                            bottomText: Text(
-                              '${auth.user.email}'+'\n'
-                                  'Name: ${data['name']},'+'\n'
-                                  'Age: ${data['age']}',
-                              style: TextStyle(fontSize: 24),
-                            ),
-                            icon: Icons.attach_money,
-                            color: Colors.deepOrange,
-
                           ),
+                          bottomText: Text(
+                            '${auth.user.email}' +
+                                '\n'
+                                    'Name: ${data['name']},' +
+                                '\n'
+                                    'Age: ${data['age']}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 24),
+                          ),
+                          icon: Icons.attach_money,
+                          color: Colors.deepOrange,
                         ),
-                        Expanded(
-                            child: dashboardContainer(
+                        dashboardContainer(
                           text: Text(
                             'TotalAmount',
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -117,37 +119,34 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           bottomText: Text(
-                            '\$1000.00'+'\n'
-                                'Address: ${data['address']}'+'\n'
-                                'phonenum: ${data['phonenum']}',
+                            '\$1000.00' +
+                                '\n'
+                                    'Address: ${data2['address']}' +
+                                '\n'
+                                    'phonenum: ${data2['phonenum']}',
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 24, color: Colors.white),
                           ),
                           icon: Icons.cabin,
                           color: Colors.deepPurple,
-
-                        )),
-                        Expanded(
-                          child: dashboardContainer(
-                            text: Text(
-                              'MY amount',
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
-                            ),
-                            bottomText: Text(
-                              '\$1000.00',
-                              style:
-                                  TextStyle(fontSize: 24, color: Colors.white),
-                            ),
-                            icon: Icons.ice_skating,
-                            color: Colors.deepPurpleAccent,
-
-                          ),
                         ),
-                        Expanded(
-                            child: dashboardContainer(
+                        dashboardContainer(
+                          text: Text(
+                            'MY amount',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          bottomText: Text(
+                            '\$1000.00',
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
+                          icon: Icons.ice_skating,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        dashboardContainer(
                           text: Text(
                             'my amount',
                             style: TextStyle(
@@ -161,35 +160,28 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           icon: Icons.ice_skating,
                           color: Colors.deepOrange,
-
-                        )),
-                        Expanded(
-                          child: dashboardContainer(
-                            text: Text(
-                              'Account',
-                              style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87),
-                            ),
-                            bottomText: Text(
-                              '\$1000.00',
-                              style:
-                                  TextStyle(fontSize: 24, color: Colors.white),
-                            ),
-                            icon: Icons.ice_skating,
-                            color: Colors.orangeAccent,
-
+                        ),
+                        dashboardContainer(
+                          text: Text(
+                            'Account',
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87),
                           ),
-                        )
+                          bottomText: Text(
+                            '\$1000.00',
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
+                          icon: Icons.ice_skating,
+                          color: Colors.orangeAccent,
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  Center(
-                    child: Expanded(
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton.icon(
@@ -197,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
                             Map<String, String> data = {
                               "id": "1",
                               "Name": "Boss",
-                              'roll':'65812'
+                              'roll': '65812'
                             };
                             FirebaseFirestore.instance
                                 .collection('info')
@@ -215,25 +207,35 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                        onPressed: (){
-                          context.read<FirebaseAuthMethods>().signOut(context);
-                        },
-                        child: Text('LogOut')),
-                  )
-                ],
-              ),
-            );
+                    Center(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            context
+                                .read<FirebaseAuthMethods>()
+                                .signOut(context);
+                          },
+                          child: Text('LogOut')),
+                    )
+                  ],
+                ),
+              );
           }),
         ]));
   }
+
   Column user_details_form() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(child: Text('Give Your Information',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic,color: Color(0xff4f378b)),)),
+        Center(
+            child: Text(
+          'Give Your Information',
+          style: TextStyle(
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              color: Color(0xff4f378b)),
+        )),
         TextContainer(
             nameController: nameController,
             labelText: "Name",
@@ -249,7 +251,7 @@ class _DashboardState extends State<Dashboard> {
         TextContainer(
             nameController: adressController,
             labelText: 'Enter Your Address',
-            icon:Icon(Icons.ice_skating_sharp),
+            icon: Icon(Icons.ice_skating_sharp),
             obscureText: false,
             hintText: 'gfd'),
         TextContainer(
@@ -262,10 +264,14 @@ class _DashboardState extends State<Dashboard> {
           height: 20.0,
         ),
         ElevatedButton(
-            onPressed: (){
+            onPressed: () {
               saveData();
-             setStateIfDataExist();
-        }, child: Text('submit'))
+              setStateIfDataExist();
+            },
+            child: Text('submit')),
+        SizedBox(
+          height: 20.0,
+        ),
       ],
     );
   }

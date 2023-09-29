@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_setup/dashboard/components/Sidemenu.dart';
+import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class dashboard2 extends StatefulWidget{
   static const String id= 'dashboard2';
@@ -26,36 +28,52 @@ class _dashboard2State extends State<dashboard2> {
             ),
             Expanded(
               flex: 5,
-              child: Container(
-               color: Colors.cyan,
-                child: Container(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: user,
-                    builder: (
-                        BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot,
-                        ){
-                      if(snapshot.hasError){
-                        return Text('This is error');
-                      }
-                      if(snapshot.connectionState==ConnectionState.waiting){
-                        return Text('Loading');
-                      }
-                      final data = snapshot.requireData;
-                      return ListView.builder(
-                          itemCount: data.size,
-                          itemBuilder: (
-                              context,
-                              index,
-                              ){
-                            return Text('User name ${data.docs[index]['Name']}' );
-                          }
-                      );
-                    },
+              child: Row(
+                children: [
+                  Expanded(child:
+                  Container(
+                    color: Colors.red,
+                    height: 550,
+                    width: 350,
+                    child:SfCartesianChart(
+                      backgroundColor: Colors.purpleAccent,
+                      title: ChartTitle(
+                        text: 'Mamun',
+                        textStyle: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold
+                        ),
+                        alignment: ChartAlignment.center
+                      ),
+                    ),
+                  )
                   ),
-                ),
+                  SizedBox(
+                    width: 50.0,
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.red,
+                      height: 550,
+                      width: 350,
+                      child:SfCartesianChart(
+                        title: ChartTitle(
+                            text: 'Kings',
+                            textStyle: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold
+                            ),
+                            alignment: ChartAlignment.center
+                        ),
+                        backgroundColor: Colors.orangeAccent,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            )
+            ),
+
+
           ],
         ),
       )
