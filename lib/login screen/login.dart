@@ -1,3 +1,4 @@
+import 'package:firebase_setup/dashboard2/dashboard22.dart';
 import 'package:firebase_setup/registration%20Screen/registration.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/material.dart';
@@ -140,10 +141,18 @@ class _loginState extends State<login> {
                         textAlign: TextAlign.center,
                       )),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(onPressed:(){
+
+                  Navigator.pushNamed(context, dashboard22.id);
+                }, child: Text('New Dashboard')),
               )
             ],
           ),
-        ));
+        )
+    );
   }
 
   void reset() {

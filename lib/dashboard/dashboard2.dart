@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_setup/dashboard/components/Sidemenu.dart';
 import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class dashboard2 extends StatefulWidget{
   static const String id= 'dashboard2';
@@ -12,11 +13,26 @@ class dashboard2 extends StatefulWidget{
 }
 
 class _dashboard2State extends State<dashboard2> {
+  int _currentindex =0;
   final Stream<QuerySnapshot> user = FirebaseFirestore.instance.collection('info').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+        backgroundColor: Colors.red,
+          itemCount: 3,
+          tabBuilder: (index,isActive){
+            return Icon(
+              index == 0 ? Icons.home : (index == 1 ? Icons.search : Icons.person),
+              color: Colors.blue,
+            );
+          },
+          activeIndex: _currentindex,
+          onTap: (index){
+            setState(() {
+                index = _currentindex;
+            });
+          }),
       body: SafeArea(
         child:Row(
           children: [
@@ -72,7 +88,6 @@ class _dashboard2State extends State<dashboard2> {
                 ],
               ),
             ),
-
 
           ],
         ),

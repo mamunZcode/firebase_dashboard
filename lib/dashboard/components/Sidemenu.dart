@@ -13,12 +13,12 @@ class Sidemenu extends StatelessWidget {
               child: Opacity(
                 opacity: 1.0,
                 child: Image(
-                  image: AssetImage('assets/love2.png'),
+                  image: AssetImage('assets/list.png'),
                 ),
               ),
             ),
             ListTileCustom(
-              image: 'assets/love2.png',
+              image: 'assets/list.png',
               title: 'dashboard',
               press: () {},
               color: Colors.red,

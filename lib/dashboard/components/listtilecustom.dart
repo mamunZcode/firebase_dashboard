@@ -8,24 +8,26 @@ class ListTileCustom extends StatelessWidget {
     required this.color
   });
 
-  final String title;
+  final String   title;
   final Function press;
   final String image;
   Color color;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: color,
       child: ListTile(
-        leading: Image(
-          image: AssetImage(image),
-          color: Colors.redAccent,
-          height: 16,
-        ),
+        leading:
+            CircleAvatar(
+              radius: 15.0,
+              backgroundImage: AssetImage(image),
+              backgroundColor: color,
+            ),
         title: Text(
           title,
-          style: TextStyle(color: Colors.black87, fontStyle: FontStyle.italic),
+          style: TextStyle(color: Colors.black87, fontStyle: FontStyle.italic,fontSize: 10.0),
         ),
         onTap: () {
           press();

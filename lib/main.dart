@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'dashboard/dashboard.dart';
 import 'registration Screen/registration.dart';
 import 'dashboard/dashboard2.dart';
+import 'dashboard2/dashboard22.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.purple,
+          primary:Colors.pink,
+          secondary: Colors.red,
+          tertiary:Colors.black,
+      ),
+      ),
       debugShowCheckedModeBanner: false,
       // initialRoute:login.id,
       home: AuthWrapper(),
@@ -50,6 +59,7 @@ class MainApp extends StatelessWidget {
         registration.id: (context) => registration(),
         Dashboard.id: (context) => Dashboard(),
         dashboard2.id: (context) => dashboard2(),
+        dashboard22.id:(context) => dashboard22(),
       },
     );
   }

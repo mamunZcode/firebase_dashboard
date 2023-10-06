@@ -21,15 +21,19 @@ class dashboardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SingleChildScrollView(
       child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: color,
         elevation: 4,
-        child: Row(
+        margin: EdgeInsets.all(5.0),
+        child: Flex(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            direction: Axis.vertical,
             children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

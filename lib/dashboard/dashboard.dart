@@ -79,111 +79,142 @@ class _DashboardState extends State<Dashboard> {
             if (!isDataExistForCurrentUser) {
               return user_details_form();
             } else
-              return SafeArea(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        dashboardContainer(
-                          text: Text(
-                            'your mail',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+              return SingleChildScrollView(
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                 Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // direction: Axis.horizontal,
+                        children: [
+                          Expanded(
+                            flex:1,
+                            child: dashboardContainer(
+                              text: Text(
+                                'your mail',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              bottomText: Text(
+                                '${auth.user.email}' +
+                                    '\n'
+                                        'Name: ${data['name']},' +
+                                    '\n'
+                                        'Age: ${data['age']}',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                                style: TextStyle(fontSize: 24),
+                              ),
+                              icon: Icons.attach_money,
+                              color: Colors.deepOrange,
                             ),
                           ),
-                          bottomText: Text(
-                            '${auth.user.email}' +
-                                '\n'
-                                    'Name: ${data['name']},' +
-                                '\n'
-                                    'Age: ${data['age']}',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          icon: Icons.attach_money,
-                          color: Colors.deepOrange,
-                        ),
-                        dashboardContainer(
-                          text: Text(
-                            'TotalAmount',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                          Expanded(
+                            flex: 1,
+                            child: dashboardContainer(
+                              text: Text(
+                                'TotalAmount',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              bottomText: Text(
+                                '\$1000.00' +
+                                    '\n'
+                                        'Address: ${data2['address']}' +
+                                    '\n'
+                                        'phonenum: ${data2['phonenum']}',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                              icon: Icons.cabin,
+                              color: Colors.deepPurple,
                             ),
                           ),
-                          bottomText: Text(
-                            '\$1000.00' +
-                                '\n'
-                                    'Address: ${data2['address']}' +
-                                '\n'
-                                    'phonenum: ${data2['phonenum']}',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 24, color: Colors.white),
-                          ),
-                          icon: Icons.cabin,
-                          color: Colors.deepPurple,
-                        ),
-                        dashboardContainer(
-                          text: Text(
-                            'MY amount',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                          Expanded(
+                            flex: 1,
+                            child: dashboardContainer(
+                              text: Text(
+                                'MY amount',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines:1,
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              bottomText: Text(
+                                '\$1000.00',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                              icon: Icons.ice_skating,
+                              color: Colors.deepPurpleAccent,
                             ),
                           ),
-                          bottomText: Text(
-                            '\$1000.00',
-                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          Expanded(
+                            flex: 1,
+                            child: dashboardContainer(
+                              text: Text(
+                                'my amount',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87),
+                              ),
+                              bottomText: Text(
+                                '\$1000.00',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                              icon: Icons.ice_skating,
+                              color: Colors.deepOrange,
+                            ),
                           ),
-                          icon: Icons.ice_skating,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        dashboardContainer(
-                          text: Text(
-                            'my amount',
-                            style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87),
+                         Expanded(
+                            flex: 1,
+                            child: dashboardContainer(
+                              text: Text(
+                                'Account',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87),
+                              ),
+                              bottomText: Text(
+                                '\$1000.00',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                              icon: Icons.ice_skating,
+                              color: Colors.orangeAccent,
+                            ),
                           ),
-                          bottomText: Text(
-                            '\$1000.00',
-                            style: TextStyle(fontSize: 24, color: Colors.white),
-                          ),
-                          icon: Icons.ice_skating,
-                          color: Colors.deepOrange,
-                        ),
-                        dashboardContainer(
-                          text: Text(
-                            'Account',
-                            style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87),
-                          ),
-                          bottomText: Text(
-                            '\$1000.00',
-                            style: TextStyle(fontSize: 24, color: Colors.white),
-                          ),
-                          icon: Icons.ice_skating,
-                          color: Colors.orangeAccent,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Center(
                         child: ElevatedButton.icon(
                           onPressed: () {
                             Map<String, String> data = {
@@ -206,17 +237,17 @@ class _DashboardState extends State<Dashboard> {
                               backgroundColor: Colors.white24),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<FirebaseAuthMethods>()
-                                .signOut(context);
-                          },
-                          child: Text('LogOut')),
-                    )
-                  ],
+                      Center(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<FirebaseAuthMethods>()
+                                  .signOut(context);
+                            },
+                            child: Text('LogOut')),
+                      )
+                    ],
+                  ),
                 ),
               );
           }),
