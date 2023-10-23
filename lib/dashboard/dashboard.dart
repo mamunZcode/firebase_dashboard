@@ -15,7 +15,6 @@ class Dashboard extends StatefulWidget {
   @override
   State<Dashboard> createState() => _DashboardState();
 }
-
 class _DashboardState extends State<Dashboard> {
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -251,7 +250,9 @@ class _DashboardState extends State<Dashboard> {
                 ),
               );
           }),
-        ]));
+        ]
+        )
+    );
   }
 
   Column user_details_form() {

@@ -5,23 +5,26 @@ class dashboardContainer extends StatelessWidget {
     required this.text,
     required this.bottomText,
     required this.icon,
-    required this.color,
+     required this.color,
     this.child,
     this.height,
     this.width,
+    this.decoration,
   });
 
   final Text text;
   final Text bottomText;
   final IconData icon;
-  final Color color;
+  final Color  color;
   final Widget? child;
   final double? height;
   final double? width;
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Container(
+      decoration: decoration,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: color,

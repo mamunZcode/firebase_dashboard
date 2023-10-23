@@ -57,7 +57,7 @@ class MainApp extends StatelessWidget {
       routes: {
         login.id: (context) => login(),
         registration.id: (context) => registration(),
-        Dashboard.id: (context) => Dashboard(),
+        // Dashboard.id: (context) => Dashboard(),
         dashboard2.id: (context) => dashboard2(),
         dashboard22.id:(context) => dashboard22(),
       },
@@ -75,7 +75,7 @@ class AuthWrapper extends StatelessWidget {
     print('USER ${firebaseUser?.email}');
 
     if (firebaseUser != null) {
-      return Dashboard();
+      return dashboard22();
     }
     return login();
   }
