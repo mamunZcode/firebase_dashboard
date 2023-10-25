@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import '../TextContainer.dart';
 import '../dashboard/components/dashboardContainer.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:firebase_setup/dashboard2/components/linechart.dart';
 
 class dashboard22 extends StatefulWidget {
   static const String id = 'dashboard22';
@@ -292,8 +294,8 @@ class _dashboard22State extends State<dashboard22> {
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
                                                 colors: [
-                                                  Colors.blue,
-                                                  Colors.green
+                                                  Colors.blueAccent,
+                                                  Colors.green,
                                                 ],
                                                 transform:
                                                     GradientRotation(20.0))),
@@ -372,7 +374,6 @@ class _dashboard22State extends State<dashboard22> {
                                 ],
                               ),
                             ),
-
                             Expanded(
                               flex: 2,
                               child: Card(
@@ -382,24 +383,87 @@ class _dashboard22State extends State<dashboard22> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                      child: Column(
-                                    children: [
-                                      Container(
-                                        height: 150,
-                                        width: 300,
-                                        child: Row(
+                                    height: 120,
+                                    width: 300,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('data'),
-
+                                            Text('Current Memory Card'),
+                                            Icon(Icons.line_weight_sharp),
                                           ],
                                         ),
-                                      )
-                                    ],
-                                  )),
+                                        Expanded(
+                                          child: LineChart(
+                                            LineChartData(
+                                              lineTouchData: LineTouchData(
+                                                touchTooltipData:
+                                                    LineTouchTooltipData(
+                                                  tooltipBgColor: Colors
+                                                      .deepOrange, // Customize tooltip background color
+                                                ),
+                                                handleBuiltInTouches:
+                                                    true, // Enable built-in touch gestures
+                                              ),
+                                              gridData: FlGridData(
+                                                show: true,
+                                                drawHorizontalLine: true,
+                                                drawVerticalLine: true,
+                                                horizontalInterval: 1,
+                                                verticalInterval: 1,
+                                              ),
+                                              titlesData: FlTitlesData(
+                                                leftTitles: AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                        showTitles: true)),
+                                                bottomTitles: AxisTitles(
+                                                    sideTitles: SideTitles(
+                                                        showTitles: true)),
+                                              ),
+                                              borderData: FlBorderData(
+                                                show: true,
+                                                border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1.0),
+                                              ),
+                                              lineBarsData: [
+                                                LineChartBarData(
+                                                  spots: [
+                                                    FlSpot(0, 2),
+                                                    FlSpot(2, 3),
+                                                    FlSpot(4, 2.5),
+                                                    FlSpot(6, 5),
+                                                    FlSpot(8, 7),
+                                                    FlSpot(10, 9.5),
+
+                                                    // Add more data points here
+                                                  ],
+                                                  isCurved: true,
+                                                  color: Colors.red,
+                                                  dotData:
+                                                      FlDotData(show: false),
+                                                  belowBarData:
+                                                      BarAreaData(show: false),
+                                                ),
+                                              ],
+                                              minX: 0,
+                                              maxX: 14,
+                                              minY: 0,
+                                              maxY: 6,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             )
@@ -520,16 +584,48 @@ class _dashboard22State extends State<dashboard22> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
+                                    height: 250,
+                                      width: 250,
                                       child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Hellogfgfgfgffgfgfdgsfgdsg"),
-                                      Text("Hellogfgfgfggfdgsfdgdffgdfs"),
-                                      Text("Hellofgfgfggfdgsdgfgfdgfgfd"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Text('Current Status'),
+                                         Icon(Icons.line_axis),
+                                       ],
+                                     ),
+                                      Expanded(
+                                        child: PieChart(
+                                          PieChartData(
+                                            sections: [
+                                              PieChartSectionData(
+                                                color: Colors.blue, // Color of the pie section
+                                                value: 45, // Value of the section
+                                                title: '45%', // Title text (optional)
+                                                radius: 60, // Adjust the radius to make it half
+                                              ),
+                                              PieChartSectionData(
+                                                color: Colors.red, // Color of the pie section
+                                                value: 55, // Value of the section
+                                                title: '55%', // Title text (optional)
+                                                radius: 60, // Adjust the radius to make it half
+                                              ),
+                                            ],
+                                            borderData: FlBorderData(show: false), // Hide the border
+                                            sectionsSpace: 0, // Remove spacing between sections
+                                            centerSpaceRadius: 40, // Adjust the hole size in the center
+                                            startDegreeOffset: 90, // Rotate the chart to make it a half pie
+                                          ),
+                                        ),
+                                      ),
                                     ],
-                                  )),
+                                  )
+
+                                  ),
                                 ),
                               ),
                             ),
@@ -542,14 +638,35 @@ class _dashboard22State extends State<dashboard22> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
+                                      height: 200,
+                                      width: 250,
                                       child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Hellogfgfgfgffgfgfdgsfgdsg"),
-                                      Text("Hellogfgfgfggfdgsfdgdffgdfs"),
-                                      Text("Hellofgfgfggfdgsdgfgfdgfgfd"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
-                                      Text("Hellogfgfgfgfdgfsdgfdgfgfg"),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Cloud Storage'),
+                                          Icon(Icons.line_weight),
+                                        ],
+                                      ),
+                                      Center(
+                                        child: Image(
+                                          image: AssetImage('assets/cloud.png'),
+                                          height: 150,
+                                          width: 150,
+                                        ),
+                                      ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('45 / 320GB'),
+                                          Icon(Icons.line_weight),
+                                        ],
+                                      ),
                                     ],
                                   )),
                                 ),

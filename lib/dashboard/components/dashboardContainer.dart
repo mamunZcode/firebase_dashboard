@@ -5,7 +5,7 @@ class dashboardContainer extends StatelessWidget {
     required this.text,
     required this.bottomText,
     required this.icon,
-     required this.color,
+    required this.color,
     this.child,
     this.height,
     this.width,
