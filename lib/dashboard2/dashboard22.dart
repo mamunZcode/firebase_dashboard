@@ -4,13 +4,12 @@ import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:firebase_setup/service/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
-
 import '../TextContainer.dart';
 import '../dashboard/components/dashboardContainer.dart';
-import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:firebase_setup/dashboard2/components/linechart.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class dashboard22 extends StatefulWidget {
   static const String id = 'dashboard22';
@@ -68,7 +67,7 @@ class _dashboard22State extends State<dashboard22> {
   }
 
   int _currentindex = 0;
-
+//Design Forntend
 // app start
   @override
   Widget build(BuildContext context) {
@@ -595,7 +594,7 @@ class _dashboard22State extends State<dashboard22> {
                                        crossAxisAlignment: CrossAxisAlignment.start,
                                        children: [
                                          Text('Current Status'),
-                                         Icon(Icons.line_axis),
+                                         Flexible(child: Icon(Icons.line_axis)),
                                        ],
                                      ),
                                       Expanded(
@@ -622,7 +621,17 @@ class _dashboard22State extends State<dashboard22> {
                                           ),
                                         ),
                                       ),
-                                    ],
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon( Symbols.settings,
+                                            fill: 1, weight: 700, grade: 0.25, opticalSize: 48 ,color: Colors.blueAccent,),
+                                          Icon( Symbols.accessibility_new,
+                                            fill: 1, weight: 700, grade: 0.25, opticalSize: 48 ,color: Colors.blueAccent,),
+                                        ],
+                                      )
+                                     ],
                                   )
 
                                   ),
@@ -638,7 +647,7 @@ class _dashboard22State extends State<dashboard22> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                      height: 200,
+                                      height: 250,
                                       width: 250,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.start,
@@ -649,7 +658,7 @@ class _dashboard22State extends State<dashboard22> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Cloud Storage'),
-                                          Icon(Icons.line_weight),
+                                          Flexible(child: Icon(Icons.line_weight)),
                                         ],
                                       ),
                                       Center(
@@ -659,12 +668,15 @@ class _dashboard22State extends State<dashboard22> {
                                           width: 150,
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('45 / 320GB'),
-                                          Icon(Icons.line_weight),
+                                          Flexible(child: Icon(Icons.sd_storage_outlined)),
                                         ],
                                       ),
                                     ],
