@@ -14,21 +14,23 @@ class ListTileCustom2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: color,
-      child: Center(
-        child: ListTile(
-          leading:
-          CircleAvatar(
-            foregroundColor: foregroundColor,
-            radius: 15.0,
-            backgroundImage: AssetImage(image),
-            backgroundColor: color,
+    return Flexible(
+      child: Container(
+        color: color,
+        child: Center(
+          child: ListTile(
+            leading:
+            CircleAvatar(
+              foregroundColor: foregroundColor,
+              radius: 15.0,
+              backgroundImage: AssetImage(image),
+              backgroundColor: color,
+            ),
+            onTap: () {
+              press();
+            },
+            horizontalTitleGap: 0.0,
           ),
-          onTap: () {
-            press();
-          },
-          horizontalTitleGap: 0.0,
         ),
       ),
     );

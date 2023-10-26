@@ -4,13 +4,12 @@ import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:firebase_setup/service/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
-
 import '../TextContainer.dart';
 import '../dashboard/components/dashboardContainer.dart';
-import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:firebase_setup/dashboard2/components/linechart.dart';
+import 'package:firebase_setup/login%20screen/login.dart';
 
 class dashboard22 extends StatefulWidget {
   static const String id = 'dashboard22';
@@ -68,7 +67,7 @@ class _dashboard22State extends State<dashboard22> {
   }
 
   int _currentindex = 0;
-
+//Design Forntend
 // app start
   @override
   Widget build(BuildContext context) {
@@ -108,20 +107,33 @@ class _dashboard22State extends State<dashboard22> {
                       )),
                       ListTileCustom2(
                         image: 'assets/home.png',
-                        press: () {},
+                        press: () {
+                          Navigator.pushNamed(context,login.id);
+                        },
                       ),
                       ListTileCustom2(
                         image: 'assets/star1.png',
                         press: () {},
                         foregroundColor: Colors.black,
                       ),
-                      ListTileCustom2(image: 'assets/love.png', press: () {}),
+                      ListTileCustom2(image: 'assets/love.png',
+                          press: () {}
+                      ),
                       ListTileCustom2(
-                          image: 'assets/location.png', press: () {}),
-                      ListTileCustom2(image: 'assets/chat.png', press: () {}),
+                          image: 'assets/location.png',
+                          press: () {}
+                      ),
+                      ListTileCustom2(image: 'assets/chat.png',
+                          press: () {}
+                      ),
                       ListTileCustom2(
-                          image: 'assets/setting.png', press: () {}),
-                      ListTileCustom2(image: 'assets/wifi.png', press: () {}),
+                          image: 'assets/setting.png',
+                          press: () {}
+                      ),
+                      ListTileCustom2(
+                          image: 'assets/wifi.png',
+                          press: () {}
+                      ),
                     ],
                   ),
                   width: 80.0,
@@ -131,6 +143,7 @@ class _dashboard22State extends State<dashboard22> {
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppBar(
                           leading: Center(
@@ -150,7 +163,7 @@ class _dashboard22State extends State<dashboard22> {
                             IconButton(
                               onPressed: () {},
                               icon: Icon(Icons.search_rounded),
-                              tooltip: 'open it',
+                              tooltip: 'search it',
                             )
                           ],
                           iconTheme: IconThemeData(
@@ -177,8 +190,8 @@ class _dashboard22State extends State<dashboard22> {
                                         tileMode: TileMode.clamp,
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [Colors.blue, Colors.green],
-                                        transform: GradientRotation(20.0))),
+                                        colors: [Colors.yellowAccent, Colors.greenAccent],
+                                        transform: GradientRotation(10.0))),
                                 text: Text(
                                   'your mail',
                                   overflow: TextOverflow.fade,
@@ -210,8 +223,8 @@ class _dashboard22State extends State<dashboard22> {
                                           tileMode: TileMode.clamp,
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,
-                                          colors: [Colors.blue, Colors.green],
-                                          transform: GradientRotation(20.0))),
+                                          colors: [Colors.yellowAccent, Colors.greenAccent],
+                                          transform: GradientRotation(10.0))),
                                   text: Text(
                                     'Your Details',
                                     overflow: TextOverflow.fade,
@@ -242,8 +255,8 @@ class _dashboard22State extends State<dashboard22> {
                                         tileMode: TileMode.clamp,
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [Colors.blue, Colors.green],
-                                        transform: GradientRotation(20.0))),
+                                        colors: [Colors.yellowAccent, Colors.greenAccent],
+                                        transform: GradientRotation(10.0))),
                                 text: Text(
                                   'your mail',
                                   overflow: TextOverflow.fade,
@@ -294,11 +307,11 @@ class _dashboard22State extends State<dashboard22> {
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
                                                 colors: [
-                                                  Colors.blueAccent,
-                                                  Colors.green,
+                                                  Colors.yellowAccent,
+                                                  Colors.greenAccent,
                                                 ],
                                                 transform:
-                                                    GradientRotation(20.0))),
+                                                    GradientRotation(10.0))),
                                         height: 80,
                                         width: 300,
                                         child: Row(
@@ -344,7 +357,9 @@ class _dashboard22State extends State<dashboard22> {
                                                 Colors.blue,
                                                 Colors.green
                                               ],
-                                            )),
+                                              transform: GradientRotation(20.0)
+                                            )
+                                        ),
                                         height: 80,
                                         width: 300,
                                         child: Row(
@@ -595,7 +610,7 @@ class _dashboard22State extends State<dashboard22> {
                                        crossAxisAlignment: CrossAxisAlignment.start,
                                        children: [
                                          Text('Current Status'),
-                                         Icon(Icons.line_axis),
+                                         Flexible(child: Icon(Icons.line_axis)),
                                        ],
                                      ),
                                       Expanded(
@@ -622,7 +637,17 @@ class _dashboard22State extends State<dashboard22> {
                                           ),
                                         ),
                                       ),
-                                    ],
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon( Symbols.settings,
+                                            fill: 1, weight: 700, grade: 0.25, opticalSize: 48 ,color: Colors.blueAccent,),
+                                          Icon( Symbols.sd_card,
+                                            fill: 1, weight: 700, grade: 0.25, opticalSize: 48 ,color: Colors.red,),
+                                        ],
+                                      )
+                                     ],
                                   )
 
                                   ),
@@ -638,7 +663,7 @@ class _dashboard22State extends State<dashboard22> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                      height: 200,
+                                      height: 250,
                                       width: 250,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.start,
@@ -649,7 +674,7 @@ class _dashboard22State extends State<dashboard22> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Cloud Storage'),
-                                          Icon(Icons.line_weight),
+                                          Flexible(child: Icon(Icons.line_weight)),
                                         ],
                                       ),
                                       Center(
@@ -659,12 +684,15 @@ class _dashboard22State extends State<dashboard22> {
                                           width: 150,
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('45 / 320GB'),
-                                          Icon(Icons.line_weight),
+                                          Flexible(child: Icon(Icons.sd_storage_outlined)),
                                         ],
                                       ),
                                     ],

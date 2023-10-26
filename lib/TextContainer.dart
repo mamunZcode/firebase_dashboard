@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TextContainer extends StatelessWidget {
   TextContainer(
-      {required this.nameController,
+      {
+        required this.nameController,
       required this.labelText,
       required this.icon,
       required this.obscureText,
