@@ -33,7 +33,7 @@ class dashboardContainer extends StatelessWidget {
         child: Flex(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            direction: Axis.horizontal,
+            direction: Axis.vertical,
             children: [
           Padding(
             padding: EdgeInsets.all(20.0),
