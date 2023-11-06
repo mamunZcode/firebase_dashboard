@@ -11,6 +11,7 @@ import '../dashboard/components/dashboardContainer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:firebase_setup/login%20screen/login.dart';
 
+
 class dashboard22 extends StatefulWidget {
   static const String id = 'dashboard22';
 
@@ -19,7 +20,7 @@ class dashboard22 extends StatefulWidget {
 }
 
 class _dashboard22State extends State<dashboard22> {
-// Backend
+// // Backend
   TextEditingController searchContoller = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -92,9 +93,10 @@ class _dashboard22State extends State<dashboard22> {
       body: Consumer<FirebaseAuthMethods>(builder: (context, auth, child) {
         if (!isDataExistForCurrentUser) {
           return user_details_form();
+          // return middleScreen();
         } else {
-          return SafeArea(
-            child: Row(
+          return PageView(
+            children:[ Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Drawer(
@@ -708,62 +710,77 @@ class _dashboard22State extends State<dashboard22> {
                 )
               ],
             ),
+        ]
           );
         }
       }),
     );
   }
 
-  Column user_details_form() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-            child: Text(
-          'Give Your Information',
-          style: TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic,
-              color: Color(0xff4f378b)),
-        )),
-        TextContainer(
-            nameController: nameController,
-            labelText: "Name",
-            icon: Icon(Icons.verified_user),
-            obscureText: false,
-            hintText: 'Enter your name'),
-        TextContainer(
-            nameController: ageController,
-            labelText: "Age",
-            icon: Icon(Icons.numbers),
-            obscureText: false,
-            hintText: 'Enter your age'),
-        TextContainer(
-            nameController: addressController,
-            labelText: 'Enter Your Address',
-            icon: Icon(Icons.ice_skating_sharp),
-            obscureText: false,
-            hintText: 'gfd'),
-        TextContainer(
-            nameController: phoneController,
-            labelText: 'Enter Your Phone Num',
-            icon: Icon(Icons.ice_skating_sharp),
-            obscureText: false,
-            hintText: '017456'),
-        SizedBox(
-          height: 20.0,
-        ),
-        ElevatedButton(
-            onPressed: () {
-              saveData();
-              setStateIfdataExist();
-            },
-            child: Text('submit')),
-        SizedBox(
-          height: 20.0,
-        ),
-      ],
+  Container user_details_form() {
+    return Container(
+      decoration: BoxDecoration(
+        // color: Colors.lightGreen,
+       image:DecorationImage(
+         image: AssetImage('assets/Mamun.jpeg'),
+         fit: BoxFit.fill,
+         colorFilter: ColorFilter.mode(Colors.white54.withOpacity(0.2), BlendMode.srcOver,)
+       ) ,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+              child: Text(
+            'Give Your Information',
+            style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: Color(0xff4f378b)),
+          )),
+          TextContainer(
+            color: Colors.white54,
+              nameController: nameController,
+              labelText: "Name",
+              icon: Icon(Icons.verified_user),
+              obscureText: false,
+              hintText: 'Enter your name'),
+          TextContainer(
+            color: Colors.white54,
+              nameController: ageController,
+              labelText: "Age",
+              icon: Icon(Icons.numbers),
+              obscureText: false,
+              hintText: 'Enter your age'),
+          TextContainer(
+            color: Colors.white54,
+              nameController: addressController,
+              labelText: 'Enter Your Address',
+              icon: Icon(Icons.ice_skating_sharp),
+              obscureText: false,
+              hintText: 'gfd'),
+          TextContainer(
+            color: Colors.white54,
+              nameController: phoneController,
+              labelText: 'Enter Your Phone Num',
+              icon: Icon(Icons.ice_skating_sharp),
+              obscureText: false,
+              hintText: '017456'),
+          SizedBox(
+            height: 20.0,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                saveData();
+                setStateIfdataExist();
+              },
+              child: Text('submit')),
+          SizedBox(
+            height: 20.0,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -172,6 +172,7 @@ class _DashboardState extends State<Dashboard> {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: TextStyle(
+
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black87),
@@ -269,24 +270,28 @@ class _DashboardState extends State<Dashboard> {
               color: Color(0xff4f378b)),
         )),
         TextContainer(
+          color: Colors.black,
             nameController: nameController,
             labelText: "Name",
             icon: Icon(Icons.verified_user),
             obscureText: false,
             hintText: 'Enter your name'),
         TextContainer(
+          color: Colors.black,
             nameController: ageController,
             labelText: "Age",
             icon: Icon(Icons.numbers),
             obscureText: false,
             hintText: 'Enter your age'),
         TextContainer(
+          color: Colors.black,
             nameController: adressController,
             labelText: 'Enter Your Address',
             icon: Icon(Icons.ice_skating_sharp),
             obscureText: false,
             hintText: 'gfd'),
         TextContainer(
+          color: Colors.black,
             nameController: phonenumController,
             labelText: 'Enter Your Phone Num',
             icon: Icon(Icons.ice_skating_sharp),

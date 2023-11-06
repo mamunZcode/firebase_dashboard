@@ -7,13 +7,16 @@ class TextContainer extends StatelessWidget {
       required this.labelText,
       required this.icon,
       required this.obscureText,
-      required this.hintText});
+      required this.hintText,
+        required this.color
+      });
 
   final TextEditingController nameController;
   final String labelText;
   final Icon icon;
   final bool obscureText;
   final hintText;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class TextContainer extends StatelessWidget {
               child: TextFormField(
                 obscureText: obscureText,
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: color,
                   fontSize: 20.0,
                   // fontStyle: FontStyle.italic
                 ),
@@ -37,7 +40,7 @@ class TextContainer extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: labelText,
                   prefixIcon: icon,
-                  labelStyle: TextStyle(color: Colors.black87),
+                  labelStyle: TextStyle(color: color),
                   hintText: hintText,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.red),

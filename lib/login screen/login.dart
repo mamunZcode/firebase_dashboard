@@ -68,9 +68,11 @@ class _loginState extends State<login> {
                 icon: Icon(Icons.drive_file_rename_outline_sharp),
                 obscureText: false,
                 hintText: 'mamun@65gmail.com',
+                color: Colors.black,
               ),
               //Password
               TextContainer(
+                color: Colors.black,
                 nameController: passwordController,
                 labelText: 'Enter your password',
                 icon: Icon(Icons.password_outlined),

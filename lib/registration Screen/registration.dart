@@ -47,15 +47,15 @@ class _registrationState extends State<registration> {
                 height: 50.0,
               ),
               //Name
-              TextContainer(nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false, hintText:'Muntasir',
+              TextContainer(color:Colors.black,nameController: nameController, labelText: 'Enter Your Name', icon: Icon(Icons.drive_file_rename_outline),obscureText:false, hintText:'Muntasir',
               ),
               //Email
-              TextContainer(nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,hintText: 'mamun@gmail.com',
+              TextContainer(color:Colors.black,nameController: emailController, labelText: 'Enter Your Email', icon: Icon(Icons.email),obscureText: false,hintText: 'mamun@gmail.com',
               ),
               //pass
-              TextContainer(nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,hintText: '12345',),
+              TextContainer(color:Colors.black,nameController: passController, labelText: 'Enter Your Password', icon: Icon(Icons.password_rounded), obscureText: true,hintText: '12345',),
 
-              TextContainer(nameController: idController, labelText: 'Enter Your id Please', icon: Icon(EvaIcons.heart), obscureText: false, hintText: '192-35-2870'),
+              TextContainer(color:Colors.black,nameController: idController, labelText: 'Enter Your id Please', icon: Icon(EvaIcons.heart), obscureText: false, hintText: '192-35-2870'),
               //Button
               Expanded(
                 child: Padding(
@@ -63,7 +63,6 @@ class _registrationState extends State<registration> {
                   child: Expanded(
                     child: ElevatedButton.icon(
                       onPressed: singup,
-
                       icon: Icon(
                         Icons.done,
                       ),
