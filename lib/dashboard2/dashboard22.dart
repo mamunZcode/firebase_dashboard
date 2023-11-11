@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:firebase_setup/dashboard2/components/listtileCustom2.dart';
 import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:firebase_setup/service/firestore_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -22,6 +23,7 @@ class dashboard22 extends StatefulWidget {
 class _dashboard22State extends State<dashboard22> {
 // // Backend
   TextEditingController searchContoller = TextEditingController();
+  TextEditingController amountController=TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -58,6 +60,7 @@ class _dashboard22State extends State<dashboard22> {
     await firestoreService.addPersonalData(currentUser.uid, {
       'address': addressController.value.text,
       'phonenum': phoneController.value.text,
+      'amount': amountController.value.text,
     });
   }
 
@@ -96,7 +99,8 @@ class _dashboard22State extends State<dashboard22> {
           // return middleScreen();
         } else {
           return PageView(
-            children:[ Row(
+            children:[
+              Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Drawer(
@@ -260,7 +264,7 @@ class _dashboard22State extends State<dashboard22> {
                                         colors: [Colors.yellowAccent, Colors.greenAccent],
                                         transform: GradientRotation(10.0))),
                                 text: Text(
-                                  'your mail',
+                                  'Balance',
                                   overflow: TextOverflow.fade,
                                   style: TextStyle(
                                     fontSize: 24,
@@ -269,11 +273,11 @@ class _dashboard22State extends State<dashboard22> {
                                   ),
                                 ),
                                 bottomText: Text(
-                                  '${'Mamun'}' +
+                                  '${'Balance'}' +
                                       '\n'
-                                          'Name: ${['name']},' +
-                                      '\n'
-                                          'Age: ${['age']}',
+                                          'Total Balance: ${data2['amount']},' +
+                                      '\n',
+                                          // 'Age: ${['age']}',
                                   overflow: TextOverflow.fade,
                                   style: TextStyle(fontSize: 24),
                                 ),
@@ -767,6 +771,13 @@ class _dashboard22State extends State<dashboard22> {
               icon: Icon(Icons.ice_skating_sharp),
               obscureText: false,
               hintText: '017456'),
+          TextContainer(
+              nameController: amountController,
+              labelText: 'Enter Your Total Balance',
+              icon: Icon(CupertinoIcons.money_dollar),
+              obscureText: false,
+              hintText: '200\$',
+              color: Colors.white54),
           SizedBox(
             height: 20.0,
           ),
