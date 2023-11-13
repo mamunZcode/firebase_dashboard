@@ -5,7 +5,6 @@ import 'package:firebase_setup/service/firebase_auth_methods.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dashboard/dashboard.dart';
 import 'registration Screen/registration.dart';
 import 'dashboard/dashboard2.dart';
 import 'dashboard2/dashboard22.dart';
@@ -32,7 +31,7 @@ Future main() async {
           initialData: null,
         ),
       ],
-      child: const MainApp(),
+      child:  MainApp(),
     ),
   );
 }
