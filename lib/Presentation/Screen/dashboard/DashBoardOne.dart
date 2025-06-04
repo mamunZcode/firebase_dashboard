@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_setup/dashboard/components/Sidemenu.dart';
-import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
+
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
+import 'components/Sidemenu.dart';
 
 class dashboard2 extends StatefulWidget{
   static const String id= 'dashboard2';

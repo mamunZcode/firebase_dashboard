@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_setup/service/firestore_service.dart';
+
+import 'service/firestore_service.dart';
 class firestore_docs extends ChangeNotifier{
 
   List<MyDocument> _documents = [];
 
   List<MyDocument> get documents => _documents;
 
-  FirestoreService firestoreService = FirestoreService();
+  FireStoreService firestoreService = FireStoreService();
 
   void listenToDocuments(String userId) {
     firestoreService.listenToDocuments(userId, (documents) {
@@ -21,7 +22,7 @@ class firestore_docs extends ChangeNotifier{
   }
 
   void deleteDocument(MyDocument document, String uid) async {
-    var firestoreService = FirestoreService();
+    var firestoreService = FireStoreService();
     await firestoreService.deleteDocument(uid, document.doc_id);
   }
 

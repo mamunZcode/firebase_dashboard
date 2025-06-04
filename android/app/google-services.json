@@ -3,7 +3,7 @@
     "project_number": "734812578241",
     "firebase_url": "https://firebsesetup-default-rtdb.firebaseio.com",
     "project_id": "firebsesetup",
-    "storage_bucket": "firebsesetup.appspot.com"
+    "storage_bucket": "firebsesetup.firebasestorage.app"
   },
   "client": [
     {

@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
         android:label="firebase_setup"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- TODO: Add your Google Maps API key here -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBS3_4i7Lg7HD_cJfLVC8BNHUZ1yP5O128"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

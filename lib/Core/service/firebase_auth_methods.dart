@@ -1,21 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_setup/Presentation/Screen/login%20screen/login.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_setup/login screen/login.dart';
-import 'package:firebase_setup/dashboard/dashboard.dart';
+import '../../Presentation/Screen/newdashboard/newDashBoard.dart';
 
-import '../dashboard2/dashboard22.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
-
   FirebaseAuthMethods(this._auth);
-
   User get user => _auth.currentUser!;
-
-
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
-  // EMAIL SIGN UP
+  /// EMAIL SIGN UP
   Future<void> signUpWithEmail({
     required String email,
     required String password,
@@ -39,7 +34,7 @@ class FirebaseAuthMethods {
     }
   }
 
-  // EMAIL LOGIN
+  /// EMAIL LOGIN
   Future<void> loginWithEmail({
     required String email,
     required String password,
@@ -59,13 +54,13 @@ class FirebaseAuthMethods {
       // replace navigator with home screen
       Navigator.replace(context,
           oldRoute: ModalRoute.of(context)!,
-          newRoute: MaterialPageRoute(builder: (context) => dashboard22()));
+          newRoute: MaterialPageRoute(builder: (context) => NewDashBoard()));
     } on FirebaseAuthException catch (e) {
-      print('failed ' + e.toString());
+      print('Login failed ' + e.toString());
     }
   }
 
-  // EMAIL VERIFICATION
+  /// EMAIL VERIFICATION
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
       _auth.currentUser!.sendEmailVerification();
@@ -75,17 +70,17 @@ class FirebaseAuthMethods {
     }
   }
 
-  // SIGN OUT
+  /// SIGN OUT
   Future<void> signOut(BuildContext context) async {
     try {
       await _auth.signOut();
       Navigator.pushNamed(context, login.id);
     } on FirebaseAuthException catch (e) {
-      // showSnackBar(context, e.message!); // Displaying the error message
+      (context, e.message!); // Displaying the error message
     }
   }
 
-  // DELETE ACCOUNT
+  /// DELETE ACCOUNT
   Future<void> deleteAccount(BuildContext context) async {
     try {
       await _auth.currentUser!.delete();

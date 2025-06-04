@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_setup/service/firebase_auth_methods.dart';
-import '../TextContainer.dart';
-import '../service/firestore_service.dart';
-import 'dashboard2.dart';
-import 'package:firebase_setup/dashboard/components/dashboardContainer.dart';
+import '../../../Core/service/firebase_auth_methods.dart';
+import '../../../Core/service/firestore_service.dart';
+import '../../Widget/TextContainer.dart';
+import 'DashBoardOne.dart';
+import 'components/dashboardContainer.dart';
+
 
 class Dashboard extends StatefulWidget {
   static const String id = 'dashboard';
@@ -20,7 +21,7 @@ class _DashboardState extends State<Dashboard> {
   TextEditingController ageController = TextEditingController();
   TextEditingController adressController = TextEditingController();
   TextEditingController phonenumController = TextEditingController();
-  FirestoreService firestoreService = FirestoreService();
+  FireStoreService firestoreService = FireStoreService();
   bool isDataExistForCurrentUser = false;
   Map<String, dynamic> data = {};
   Map<String, dynamic> data2 = {};

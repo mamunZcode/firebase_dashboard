@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ListTileCustom2 extends StatelessWidget {
-  ListTileCustom2({
+  ListTileCustom2({super.key,
     required this.image,
     required this.press,
     this.color,

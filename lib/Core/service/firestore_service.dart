@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:firebase_setup/firestore_docs/MyDocement.dart';
+import '../MyDocument.dart';
 
-class FirestoreService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class FireStoreService {
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   void listenToDocuments(String userId, Function(List<MyDocument>) callback) {
-    _firestore.collection(userId).snapshots().listen((snapshot) {
+    _fireStore.collection(userId).snapshots().listen((snapshot) {
       print('object length' + snapshot.docChanges.length.toString());
       print('object' + snapshot.docChanges.first.type.toString());
       final List<MyDocument> documents = snapshot.docs.map((doc) {
@@ -21,29 +21,29 @@ class FirestoreService {
   // Add a document to a Firestore collection
   Future<void> addProfileData(
       String collectionName, Map<String, dynamic> data) async {
-    await _firestore.collection(collectionName).doc('profile_data').set(data);
+    await _fireStore.collection(collectionName).doc('profile_data').set(data);
   }
 
   Future<void> addPersonalData(
       String collectionName, Map<String, dynamic> data2) async {
-    await _firestore.collection(collectionName).doc('personal_data').set(data2);
+    await _fireStore.collection(collectionName).doc('personal_data').set(data2);
   }
 
   // Update a document in a Firestore collection
   Future<void> updateDocument(String collectionName, String documentId,
       Map<String, dynamic> data) async {
-    await _firestore.collection(collectionName).doc(documentId).update(data);
+    await _fireStore.collection(collectionName).doc(documentId).update(data);
   }
 
   // Delete a document from a Firestore collection
   Future<void> deleteDocument(String collectionName, String documentId) async {
-    await _firestore.collection(collectionName).doc(documentId).delete();
+    await _fireStore.collection(collectionName).doc(documentId).delete();
   }
 
   // Retrieve a list of documents from a Firestore collection
   Future<List<Map<String, dynamic>>> getDocuments(String collectionName) async {
     final QuerySnapshot snapshot =
-        await _firestore.collection(collectionName).get();
+        await _fireStore.collection(collectionName).get();
 
     final List<Map<String, dynamic>> documents = snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
@@ -55,7 +55,7 @@ class FirestoreService {
 
   Future<Object?> getProfileData(String uid) async {
     final DocumentSnapshot snapshot =
-        await _firestore.collection(uid).doc('profile_data').get();
+        await _fireStore.collection(uid).doc('profile_data').get();
 
     return snapshot.data();
   }

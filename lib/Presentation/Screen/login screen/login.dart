@@ -1,10 +1,10 @@
-import 'package:firebase_setup/dashboard2/dashboard22.dart';
-import 'package:firebase_setup/registration%20Screen/registration.dart';
-import 'package:firebase_setup/service/firebase_auth_methods.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../Core/service/firebase_auth_methods.dart';
+import '../../Widget/TextContainer.dart';
+import '../registration Screen/registration.dart';
 
-import '../TextContainer.dart';
 
 class login extends StatefulWidget {
   static const String id = 'login';
@@ -19,7 +19,7 @@ class _loginState extends State<login> {
   //Text Controller
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool isShow  = false;
 // Firebase auth init:
   void singIn() {
     context.read<FirebaseAuthMethods>().loginWithEmail(
@@ -44,17 +44,17 @@ class _loginState extends State<login> {
         body: SafeArea(
           child: ListView(
             children: [
-              Image(
+              const Image(
                 image: AssetImage('assets/love2.png'),
                 width: 125.0,
                 height: 125.0,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               Container(
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                         fontSize: 24.0,
@@ -65,7 +65,7 @@ class _loginState extends State<login> {
               TextContainer(
                 nameController: emailNameController,
                 labelText: 'Enter Your Email',
-                icon: Icon(Icons.drive_file_rename_outline_sharp),
+                icon: const Icon(Icons.drive_file_rename_outline_sharp),
                 obscureText: false,
                 hintText: 'mamun@65gmail.com',
                 color: Colors.black,
@@ -75,11 +75,22 @@ class _loginState extends State<login> {
                 color: Colors.black,
                 nameController: passwordController,
                 labelText: 'Enter your password',
-                icon: Icon(Icons.password_outlined),
-                obscureText: true,
+                icon: const Icon(Icons.password_outlined),
+                obscureText: !isShow,
                 hintText: '56846',
+                iconButton: IconButton(
+                  icon: Icon(
+                    isShow ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isShow = !isShow;
+                    });
+                  },
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               //Button
@@ -87,15 +98,16 @@ class _loginState extends State<login> {
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton.icon(
                     onPressed: () {
                       singIn();
                     },
-                    icon: Icon(
-                      Icons.image,
+                    icon: const Icon(
+                      Icons.login,
+                      color: Colors.black54,
                     ),
-                    label: Text(
+                    label: const Text(
                       "login",
                       style: TextStyle(color: Colors.black),
                     ),
@@ -112,11 +124,14 @@ class _loginState extends State<login> {
                     onPressed: () {
                       reset();
                     },
-                    label: Text(
+                    label: const Text(
                       'reset',
                       style: TextStyle(color: Colors.black),
                     ),
-                    icon: Icon(Icons.add_card),
+                    icon: const Icon(
+                        Icons.reset_tv_outlined,
+                      color: Colors.black54,
+                    ),
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   ),
@@ -125,32 +140,32 @@ class _loginState extends State<login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(
+                  const Center(
                       child: Text(
                     'Registration here',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.red, fontSize: 18.0),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 5.0,
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, registration.id);
+                        Navigator.pushNamed(context, Registration.id);
                       },
-                      child: Text(
+                      child: const Text(
                         'click here',
                         textAlign: TextAlign.center,
                       )),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(onPressed:(){
-
-                  Navigator.pushNamed(context, dashboard22.id);
-                }, child: Text('New Dashboard')),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: ElevatedButton(onPressed:(){
+              //
+              //     Navigator.pushNamed(context, DashboardTwo.id);
+              //   }, child: const Text('New Dashboard')),
+              // )
             ],
           ),
         )

@@ -1,26 +1,29 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:firebase_setup/dashboard2/components/listtileCustom2.dart';
-import 'package:firebase_setup/service/firebase_auth_methods.dart';
-import 'package:firebase_setup/service/firestore_service.dart';
+import 'package:firebase_setup/Presentation/Screen/login%20screen/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
-import '../TextContainer.dart';
+import '../../../Core/service/firebase_auth_methods.dart';
+import '../../../Core/service/firestore_service.dart';
+import '../../Widget/TextContainer.dart';
 import '../dashboard/components/dashboardContainer.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:firebase_setup/login%20screen/login.dart';
+
+import 'components/listtileCustom2.dart';
 
 
-class dashboard22 extends StatefulWidget {
-  static const String id = 'dashboard22';
+
+class DashboardTwo extends StatefulWidget {
+  static const String id = 'DashBoardTwo';
+
 
   @override
-  State<dashboard22> createState() => _dashboard22State();
+  State<DashboardTwo> createState() => _DashboardTwoState();
 }
 
-class _dashboard22State extends State<dashboard22> {
+class _DashboardTwoState extends State<DashboardTwo> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 // // Backend
   TextEditingController searchContoller = TextEditingController();
@@ -30,7 +33,7 @@ class _dashboard22State extends State<dashboard22> {
   TextEditingController ageController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  FirestoreService firestoreService = FirestoreService();
+  FireStoreService firestoreService = FireStoreService();
   Map<String, dynamic> data = {};
   Map<String, dynamic> data2 = {};
   bool isDataExistForCurrentUser = false;
@@ -84,7 +87,7 @@ class _dashboard22State extends State<dashboard22> {
           appBar: PreferredSize(preferredSize:Size.fromHeight(80.0),
               child:AppBar(
             backgroundColor: Colors.green,
-            bottom:TabBar(
+            bottom:const TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.home_filled)),
                 Tab(icon: Icon(Icons.image_aspect_ratio_outlined)),
@@ -96,7 +99,7 @@ class _dashboard22State extends State<dashboard22> {
                   IconButton(onPressed: (){
                     _scaffoldKey.currentState?.openEndDrawer();
                   },
-                      icon: Icon(Icons.list))
+                      icon: const Icon(Icons.list))
                 ],
           ),
           ),
