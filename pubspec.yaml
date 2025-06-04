@@ -16,7 +16,6 @@ dependencies:
   provider: ^6.0.5
   material_symbols_icons: ^4.2668.0
   eva_icons_flutter: ^3.1.0
-#  syncfusion_flutter_charts: ^23.1.38
   animated_bottom_navigation_bar: ^1.3.0
   fl_chart: ^0.64.0
 #  google_maps_flutter: ^2.5.3
