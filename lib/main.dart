@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Core/service/firebase_auth_methods.dart';
-import 'Presentation/Screen/dashboard/DashBoardOne.dart';
+
 import 'Presentation/Screen/dashboardtwo/dashBoardTwo.dart';
 import 'Presentation/Screen/login screen/login.dart';
 import 'Presentation/Screen/newdashboard/newDashBoard.dart';
@@ -59,7 +59,7 @@ class MainApp extends StatelessWidget {
       routes: {
         login.id: (context) => const login(),
         Registration.id: (context) => const Registration(),
-        dashboard2.id: (context) => dashboard2(),
+        // dashboard2.id: (context) => dashboard2(),
         DashboardTwo.id:(context) => DashboardTwo(),
         NewDashBoard.id:(context)=> const NewDashBoard(),
       },

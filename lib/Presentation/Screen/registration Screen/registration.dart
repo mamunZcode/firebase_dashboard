@@ -20,7 +20,7 @@ class _RegistrationState extends State<Registration> {
   TextEditingController passController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController idController = TextEditingController();
-  TextEditingController isController = TextEditingController();
+  TextEditingController ilController = TextEditingController();
   void singUp() {
     context
         .read<FirebaseAuthMethods>()
